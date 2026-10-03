@@ -1383,7 +1383,8 @@ const World = (() => {
       // v1.100.49: "사람들 크기가 다 다르다" 피드백 - 직원(staff/hstaff)은 human.js의 STAFF_HEAD_SIZE/
       // STAFF_BODY_SIZE에서 10% 축소 처리함(여기서는 안 건드림). 시민(손님/주민 등 플레이어·직원이 아닌
       // 일반 NPC)은 여기서 전체적으로 20% 키움.
-      const citizenScale = (a.type === 'cust' || a.type === 'vil' || a.type === 'cafeguest' || a.type === 'patient' || a.type === 'reg' || a.type === 'insp' || a.type === 'thief') ? 1.2 : 1;
+      // v1.100.51: "시민 지금 크기에 5%만 줄여줄래. 너무 커져버렸어" - 기존 1.2배에서 5% 추가로 줄임 (1.2*0.95=1.14)
+      const citizenScale = (a.type === 'cust' || a.type === 'vil' || a.type === 'cafeguest' || a.type === 'patient' || a.type === 'reg' || a.type === 'insp' || a.type === 'thief') ? 1.2 * 0.95 : 1;
       c.scale((vdir < 0 ? -1 : 1) * 1.12 * citizenScale, citizenScale);
       if (a.type === 'me') a.hold = App.carry ? { sp: App.carry.sp, coat: App.carry.coat, id: App.carry.pid } : null;
       if (a.type === 'staff') a.hold = a.m && a.m.job && a.m.job.k === 'carry' ? { sp: a.m.job.sp, coat: a.m.job.coat } : null; // v1.26: porter carrying a new pet home

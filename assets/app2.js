@@ -284,9 +284,14 @@ function showTitleScreen(onStart) {
   };
   const ov = document.createElement('div');
   ov.id = 'titleScreen';
-  ov.style.cssText = 'position:fixed;inset:0;z-index:99990;background:#2a2118;display:flex;align-items:center;justify-content:center;';
-  const btnHTML = Object.entries(BTN).map(([k, b]) => `<button data-ta="${k}" style="position:absolute;left:${b.l}%;top:${b.t}%;width:${b.w}%;height:${b.h}%;opacity:0;border:0;background:transparent;padding:0;cursor:pointer;"></button>`).join('');
-  ov.innerHTML = `<div id="titleBox" style="position:relative;width:100%;height:100%;max-width:${W / H * 100}vh;max-height:${H / W * 100}vw;aspect-ratio:${W}/${H};margin:auto;">
+  // v1.100.51: "양옆에 검은 레터박스가 있는데 꽉차게 해줘" - 기존엔 max-width/max-height로
+  // 화면 "안에 맞춤"(contain) 처리를 해서, 이미지 비율(622:1436)이 폰 화면 비율과 다르면
+  // 양옆(또는 위아래)에 검은 여백이 생겼음. overflow:hidden + width/height를 max()로 계산해서
+  // 화면을 "꽉 채우고"(cover) 넘치는 부분만 잘라내도록 바꿈. titleBox 자체의 가로세로 비율은
+  // 그대로 유지되므로(그냥 더 커질 뿐) 버튼들의 %좌표는 수정 없이 그대로 맞음.
+  ov.style.cssText = 'position:fixed;inset:0;z-index:99990;background:#2a2118;overflow:hidden;';
+  const btnHTML = Object.entries(BTN).map(([k, b]) => `<button data-ta="${k}" class="tsbtn" style="position:absolute;left:${b.l}%;top:${b.t}%;width:${b.w}%;height:${b.h}%;border:0;background:transparent;padding:0;cursor:pointer;border-radius:10px;"></button>`).join('');
+  ov.innerHTML = `<div id="titleBox" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,calc(100vh * ${W} / ${H}));height:max(100vh,calc(100vw * ${H} / ${W}));aspect-ratio:${W}/${H};">
     <img src="spr/ui/title_bg.jpg" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-user-select:none;user-select:none;">
     ${btnHTML}
   </div>`;

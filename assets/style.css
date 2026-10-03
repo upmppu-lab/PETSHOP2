@@ -70,6 +70,10 @@ button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:poin
 .btn.block{width:100%;margin-top:8px}
 .btn.dis{filter:grayscale(.8);opacity:.6}
 .btn:active{transform:translateY(2.5px);box-shadow:inset 0 1.5px 2px rgba(0,0,0,.25),0 1px 0 #2a6814}
+/* v1.100.51: 타이틀 화면(시작/종료/설정/언어) 버튼 - 그림 위에 투명하게 덮인 히트영역이라
+   원래 :active 스타일이 아예 없었음. 눌렀을 때 살짝 어두워지고 작아지는 피드백 추가 */
+.tsbtn{transition:transform .08s ease,background-color .08s ease}
+.tsbtn:active{background-color:rgba(0,0,0,.18);transform:scale(.96)}
 .pbar{height:14px;border-radius:8px;background:#e8d5b5;border:2px solid #cfae7c;overflow:hidden;position:relative;margin-top:3px}
 .pbar i{display:block;height:100%;border-radius:6px}
 .pbar span{position:absolute;inset:0;font-size:10px;font-weight:900;color:#5a3a1e;display:grid;place-items:center}
