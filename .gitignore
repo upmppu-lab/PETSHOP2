@@ -1,0 +1,14 @@
+# 빌드 결과물 폴더들 (이름이 다를 수 있으니 본인 프로젝트에 맞게 수정하세요)
+__pycache__/
+_backupdist/
+_tmp_preview/
+apk/
+apktool_src/
+character/
+petshop2/
+prebuilt/
+
+# 로그 파일 및 임시 파일
+key.pem
+_build_preview.tar.gz
+apktool.jar
